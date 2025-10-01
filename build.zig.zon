@@ -1,0 +1,19 @@
+// Copyright (C) 2025 Ellie Fisher
+//
+// This file is part of the Peg source code. It may be used under the BSD 3-Clause License.
+//
+// For full terms, see the LICENSE file or visit https://spdx.org/licenses/BSD-3-Clause.html
+
+.{
+    .name = .peg,
+    .version = "0.0.0",
+    .fingerprint = 0x60ecda5befd1d824, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.15.1",
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "LICENSE",
+    },
+}

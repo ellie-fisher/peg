@@ -1,0 +1,24 @@
+# Binaries for programs
+*.exe
+*.dll
+
+# Zig files
+.zig-cache/
+zig-out/
+*.o
+
+# VS Code files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+!*.code-workspace
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# Sublime Text files
+*.sublime-project
+*.sublime-workspace
