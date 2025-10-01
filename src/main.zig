@@ -22,8 +22,7 @@ pub fn main() !void {
 
     if (reader.check_signature()) {
         std.debug.print("{}\n\n", .{try reader.read_coff_header()});
-        const optional = try reader.read_optional_header();
-
-        std.debug.print("{}\n\n", .{optional});
+        std.debug.print("{}\n\n", .{try reader.read_optional_header()});
+        std.debug.print("{}\n\n", .{try reader.read_optional_data_dirs()});
     }
 }
