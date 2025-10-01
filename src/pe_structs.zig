@@ -37,7 +37,7 @@ pub const OptionalHeader = struct {
     entry_point_addr: u32,
     base_of_code_addr: u32,
 
-    // Windows-only fields.
+    // Windows-only fields
 
     base_of_data_addr: u32,
     image_base: U32orU64,
@@ -68,7 +68,7 @@ pub const DataDirectory = struct {
     size: u32,
 };
 
-pub const OptionHeaderDataDirs = struct {
+pub const OptionalDataDirectories = struct {
     export_table: DataDirectory,
     import_table: DataDirectory,
     resource_table: DataDirectory,
