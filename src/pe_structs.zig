@@ -68,25 +68,6 @@ pub const DataDirectory = struct {
     size: u32,
 };
 
-pub const OptionalDataDirectories = struct {
-    export_table: DataDirectory,
-    import_table: DataDirectory,
-    resource_table: DataDirectory,
-    exception_table: DataDirectory,
-    certificate_table: DataDirectory,
-    base_reloc_table: DataDirectory,
-    debug: DataDirectory,
-    architecture: DataDirectory,
-    global_ptr: DataDirectory,
-    tls_table: DataDirectory,
-    load_config_table: DataDirectory,
-    bound_import: DataDirectory,
-    import_addr_table: DataDirectory,
-    delay_import_descriptor: DataDirectory,
-    clr_runtime_header: DataDirectory,
-    _reserved: DataDirectory,
-};
-
 pub const SectionTableEntry = struct {
     name: [8]u8,
     virtual_size: u32,
@@ -97,7 +78,7 @@ pub const SectionTableEntry = struct {
     line_numbers_ptr: u32,
     num_relocs: u16,
     num_line_numbers: u16,
-    characters: SectionFlags,
+    characteristics: u32,
 };
 
 /// The CPU type this program is meant to run on.

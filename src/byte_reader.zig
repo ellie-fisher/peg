@@ -56,6 +56,12 @@ pub const ByteReader = struct {
         return if (@"u64") U32orU64{ .u64 = try self.read_u64() } else U32orU64{ .u32 = try self.read_u32() };
     }
 
+    pub fn read_fixed_string(self: *ByteReader, buffer: []u8) FileReadError!void {
+        for (0..buffer.len) |i| {
+            buffer[i] = try self.read_u8();
+        }
+    }
+
     pub fn seek(self: *ByteReader, index: usize) FileReadError!void {
         if (index < self.bytes.len) {
             self.index = index;

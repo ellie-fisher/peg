@@ -22,7 +22,10 @@ pub fn main() !void {
 
     if (reader.check_signature()) {
         std.debug.print("{}\n\n", .{try reader.read_coff_header()});
-        std.debug.print("{}\n\n", .{try reader.read_optional_header()});
-        std.debug.print("{}\n\n", .{try reader.read_optional_data_dirs()});
+
+        const optional = try reader.read_optional_header();
+
+        std.debug.print("{}\n\n", .{optional});
+        std.debug.print("{any}\n\n", .{try reader.read_optional_data_dirs(std.heap.page_allocator, optional.num_rvas_and_sizes)});
     }
 }

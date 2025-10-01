@@ -61,7 +61,7 @@ pub const PEReader = struct {
 
             // Windows-only fields
 
-            .base_of_data_addr = if (is_pe64) try self.byte_reader.read_u32() else 0,
+            .base_of_data_addr = if (is_pe64) 0 else try self.byte_reader.read_u32(),
             .image_base = try self.byte_reader.read_u32_or_u64(is_pe64),
             .section_alignment = try self.byte_reader.read_u32(),
             .file_alignment = try self.byte_reader.read_u32(),
@@ -93,24 +93,13 @@ pub const PEReader = struct {
         };
     }
 
-    pub fn read_optional_data_dirs(self: *PEReader) !pe.OptionalDataDirectories {
-        return pe.OptionalDataDirectories{
-            .export_table = try self.read_data_directory(),
-            .import_table = try self.read_data_directory(),
-            .resource_table = try self.read_data_directory(),
-            .exception_table = try self.read_data_directory(),
-            .certificate_table = try self.read_data_directory(),
-            .base_reloc_table = try self.read_data_directory(),
-            .debug = try self.read_data_directory(),
-            .architecture = try self.read_data_directory(),
-            .global_ptr = try self.read_data_directory(),
-            .tls_table = try self.read_data_directory(),
-            .load_config_table = try self.read_data_directory(),
-            .bound_import = try self.read_data_directory(),
-            .import_addr_table = try self.read_data_directory(),
-            .delay_import_descriptor = try self.read_data_directory(),
-            .clr_runtime_header = try self.read_data_directory(),
-            ._reserved = try self.read_data_directory(),
-        };
+    pub fn read_optional_data_dirs(self: *PEReader, alloc: std.mem.Allocator, num_rvas_and_sizes: u32) ![]pe.DataDirectory {
+        const dirs = try alloc.alloc(pe.DataDirectory, num_rvas_and_sizes);
+
+        for (0..num_rvas_and_sizes) |i| {
+            dirs[i] = try self.read_data_directory();
+        }
+
+        return dirs;
     }
 };
